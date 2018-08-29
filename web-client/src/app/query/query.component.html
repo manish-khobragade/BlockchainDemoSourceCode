@@ -1,0 +1,93 @@
+<form [formGroup]="myForm">
+<div style="margin: 20px;">
+  <h4>Select query and provide necessary value:</h4>
+  <input type="radio"  formControlName="query" name="query" value="temperature"> Get all temperature transactions having temperature more than value:
+  <input type="number" formControlName="temperature"><br>
+  <input type="radio"  formControlName="query" name="query" value="shipments"> Get all shipments having status:
+  <select formControlName="status">
+    <option value="CREATED">CREATED</option>
+    <option value="ACCEPTED">ACCEPTED</option>
+    <option value="IN_TRANSIT">IN_TRANSIT</option>
+    <option value="ARRIVED">ARRIVED</option>
+  </select>
+    <br><br><br>
+
+
+  <button (click)="executeQuery()" type="button" class="btn btn-primary">
+    Execute Query
+  </button>
+</div>
+</form>
+<div class="col-md-12 soft-double" *ngIf="temperatureResult && query.value == 'temperature'">
+    <h4>TemperatureReadings:</h4>
+    <table class="table table-responsive">
+      <thead class="thead">
+        <tr class="thead-cols">
+  
+          <th class="info">Transaction ID</th>
+  
+          <th class="info">Shipment ID</th>
+  
+          <th class="info">Centigrade</th>
+  
+          <th class="info">Time Stamp</th>
+  
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trans of temperatureResult">
+  
+          <td class="asset-properties td-long-text">{{trans.transactionId}}</td>
+  
+          <td class="asset-properties td-long-text">{{trans.shipment.split('#')[1]}}</td>
+  
+          <td class="asset-properties td-long-text">{{trans.centigrade}}&deg;C</td>
+  
+          <td class="asset-properties td-long-text">{{trans.timestamp}}</td>
+  
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-12" *ngIf="shipmentResult && query.value == 'shipments'">
+      <h4>Shipments:</h4>
+      <table class="table table-responsive">
+        <thead class="thead">
+          <tr class="thead-cols">
+            
+                <th class="info">Shipment ID</th>
+            
+                <th class="info">Type</th>
+            
+                <th class="info">Status</th>
+            
+                <th class="info">Unit Count</th>
+            
+                <th class="info">Contract</th>
+            
+                <th class="info">Temperature Readings</th>
+            
+                <th class="info">GPS Readings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of shipmentResult">
+            
+                <td class="asset-properties">{{asset.shipmentId}}</td>
+            
+                <td class="asset-properties">{{asset.type}}</td>
+            
+                <td class="asset-properties">{{asset.status}}</td>
+            
+                <td class="asset-properties">{{asset.unitCount}}</td>
+            
+                <td class="asset-properties">{{asset.contract.split('#')[1]}}</td>
+            
+                <td class="asset-properties">{{asset.temperatureReadings}}</td>
+            
+                <td class="asset-properties">{{asset.gpsReadings}}</td>            
+            
+          </tr>
+        </tbody>
+      </table>
+  </div>
