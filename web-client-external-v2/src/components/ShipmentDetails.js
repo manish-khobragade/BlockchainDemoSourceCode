@@ -67,7 +67,8 @@ class ShipmentDetails extends React.Component {
 
                         <div className="container">
                             <div className="row log-row">
-                                {this.props.shipmentLog &&
+                                {this.props.shipmentLog  &&
+                                 this.props.shipmentLog.length ?
                                     this.props.shipmentLog.map(log => {
                                         return (
                                             <div className="card text-center col3 log-card" key={log.key}>
@@ -79,6 +80,8 @@ class ShipmentDetails extends React.Component {
                                                 </div>
                                             </div>)
                                     })
+                                    :
+                                    <h4>No Logs Found</h4>
                                 }
                             </div>
                         </div>

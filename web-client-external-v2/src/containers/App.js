@@ -70,6 +70,7 @@ class App extends Component {
         break;
       case "ShipmentInPortEvent":
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment Location updated`;
+        eventType = 'Location Updated';
         break;
       default:
         break
