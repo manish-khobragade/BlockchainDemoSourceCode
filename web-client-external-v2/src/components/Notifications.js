@@ -5,7 +5,7 @@ const Notifications = (props) => {
     return (
         <ul className="list-group border-0 list-group-flush">
             <li className="list-group-item justify-content-between align-items-center">
-                <h2><i className="fa fa-bell mr-3">Notifications</i></h2>                
+                <h2><i className="fa fa-bell mr-3"></i>Notifications</h2>
             </li>
             {props.notifications.map((notification) => {
                 return (
@@ -15,7 +15,7 @@ const Notifications = (props) => {
                             <span className="text-muted">{notification.message}</span>
                         </span>
                         <span className="badge float-right">
-                            <h4><i className="btn fa fa-times" onClick={()=>{props.removeNotification(notification.eventId)}}></i></h4>
+                            <h4><i className="btn fa fa-times" onClick={() => { props.removeNotification(notification.eventId) }}></i></h4>
                         </span>
                     </li>)
             })
