@@ -1,6 +1,5 @@
 import React from 'react';
-// import personImage from './person-default.png'
-// import { Link } from 'react-router-dom'
+
 class UserEmulate extends React.Component {
 
     componentDidMount() {
@@ -30,28 +29,20 @@ class UserEmulate extends React.Component {
         const unreadNotificationsCount = this.props.notifications.filter((notification) => { return notification.read === false }).length;
         const showNotificationsCount = this.props.path !== "/notifications" && unreadNotificationsCount > 0;
         const userEmail = this.props.currentUser.split('#')[1];
-        const userType = this.props.currentUser.split('#')[0].replace('org.coyote.playground.blockchain.demo.','');
+        const userType = this.props.currentUser.split('#')[0].replace('org.coyote.playground.blockchain.demo.', '');
+
         return (
             <div className="card border-0 mb-3" style={{ minHeight: 780 + 'px', paddingTop: 20 + 'px' }}>
-                <div className="container mb-4">
+                <div className="container" style={{ marginBottom: 100 + 'px ' }}>
                     <div className="row">
                         <div className="col-4"><i className="fa fa-user-circle-o fa-5x" aria-hidden="true"></i></div>
-                        <div className="col-8">
-                        <b>{userEmail}</b>
-                        <p className="text-muted">{userType}</p>
+                        <div className="col-8 mt-auto">
+                            <b>{userEmail}</b>
+                            <p className="text-muted">{userType}</p>
                         </div>
                     </div>
                 </div>
 
-                {/* <div className="card border-light" style={{ textAlign: 'center', marginBottom: 20 + 'px', display: 'flex', borderTop: 0 }}> */}
-                    {/* <img src={personImage} style={{ width: 50 + '%' }} alt="Avatar" /> */}
-                    {/* <div style={{ paddingTop: 10 + 'px', paddingBottom: 20 + 'px' }}> */}
-                        {/* <i className="fa fa-user-circle-o fa-5x" aria-hidden="true"></i> */}
-                        {/* <div className="w3-text-black"> */}
-                            {/* <div><b>{this.props.currentUser.split('#')[1]}</b></div> */}
-                        {/* </div> */}
-                    {/* </div> */}
-                {/* </div> */}
                 <div>
                     <div className="">
                         <nav id="mySidebar">
