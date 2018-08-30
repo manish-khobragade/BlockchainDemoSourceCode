@@ -15,39 +15,34 @@ class CarrierShipment extends React.Component {
         this.props.acceptShipment(shipmentDetails);
     }
     render() {
-        if (!this.props.user || !this.props.user.shipments) {
-            return (
-                <div />
-            )
-        }
         return (
             <div>
-                <div className="w3-panel w3-leftbar w3-sand w3-padding-16">
-                    <div className="col-5">
-                        <h4>Accept Shipment</h4>
-                        <form>
+ 
+                <div className="card border-light mb-3">
+                    <div className="card-header bg-white">Accept Shipment</div>
+                    <div className="card-body">
+                        <form className="w-50">
                             <div className="form-group">
                                 <label htmlFor="shipment">Shipment Name</label>
                                 <select className="form-control" id="shipment" onChange={this.handleChange}>
                                     <option defaultValue>Select Shipment...</option>
-                                    {this.props.user.shipments && 
+                                    {this.props.user.shipments &&
                                         this.props.user.shipments.filter(shipment => shipment.status === "CREATED"
-                                    ).map(shipment =>
-                                        <option ref={this.shipmentId} value={shipment.shipmentId} key={shipment.shipmentId}>{shipment.shipmentId}</option>                                        
-                                    )}
+                                        ).map(shipment =>
+                                            <option ref={this.shipmentId} value={shipment.shipmentId} key={shipment.shipmentId}>{shipment.shipmentId}</option>
+                                        )}
                                 </select>
-                                {/* <input type="text" className="form-control" id="shipment" ref={this.shipmentId} /> */}
                             </div>
-                            <button type="submit" className="btn w3-teal" onClick={event => this.acceptShipment(event)}>Accept</button>
+                            <button type="submit" className="btn coyote-green" onClick={event => this.acceptShipment(event)}>Accept</button>
                         </form>
                     </div>
                 </div>
-                <hr />
-                <div className="w3-container">
-                    <div>
-                        <h4>Shipments</h4>
+
+                <div className="card border-light mt-4">
+                    <div className="card-header bg-white">Shipments</div>
+                    <div className="card-body table-responsive" style={{ overflowY: 'hidden' }}>
                         <table className="table table-hover">
-                            <thead className="w3-teal">
+                            <thead className="thead-light rounded">
                                 <tr>
                                     <th scope="col">Shipment Id</th>
                                     <th scope="col">Commodity</th>
@@ -56,6 +51,7 @@ class CarrierShipment extends React.Component {
                                     <th scope="col">Contract</th>
                                     <th scope="col">Temperature Readings</th>
                                     <th scope="col">GPS Readings</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,13 +64,15 @@ class CarrierShipment extends React.Component {
                                             <td>{shipment.unitCount}</td>
                                             <td>{shipment.contract.substring(shipment.contract.lastIndexOf("#") + 1)}</td>
                                             <td>{shipment.temperatureReadings.map((temperature) => temperature.centigrade + ", ")}</td>
-                                            <td>{shipment.gpsReadings.map((gps) => "["+ gps.latitude + gps.latitudeDir + " " + gps.longitude + gps.longitudeDir +"], ")}</td>
+                                            <td>{shipment.gpsReadings.map((gps) => "[" + gps.latitude + gps.latitudeDir + " " + gps.longitude + gps.longitudeDir + "], ")}</td>
+                                            <td><button className="btn coyote-green" onClick={() => this.props.showShipmentDetails(shipment)}>view</button></td>
                                         </tr>
                                     )}
                             </tbody>
                         </table>
                     </div>
                 </div>
+            
             </div>
 
         )

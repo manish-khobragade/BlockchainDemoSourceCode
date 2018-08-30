@@ -261,11 +261,11 @@ export const getShipmentLogs = (shipmentId, contractId) => {
     return (dispatch) => {
 
         axios.all([
-            axios.get(`${constants.ADMIN_API_URL}${constants.GET_CONTRACT}${contractId}`),
-            axios.get(`${constants.ADMIN_API_URL}${constants.QUERY_ACCEPTED_BY_SHIPMENT}${shipmentId}`),
-            axios.get(`${constants.ADMIN_API_URL}${constants.QUERY_DELIVERY_BY_SHIPEMENT}${shipmentId}`),
-            axios.get(`${constants.ADMIN_API_URL}${constants.QUERY_PICKUP_BY_SHIPMENT}${shipmentId}`),
-            axios.get(`${constants.ADMIN_API_URL}${constants.QUERY_TEMP_BY_SHIPMENT}${shipmentId}`),
+            axios.get(`${constants.API_BASE_URL}${constants.GET_CONTRACT}${contractId}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_ACCEPTED_BY_SHIPMENT}${shipmentId}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_DELIVERY_BY_SHIPEMENT}${shipmentId}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_PICKUP_BY_SHIPMENT}${shipmentId}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_TEMP_BY_SHIPMENT}${shipmentId}`),
         ])
             .then(axios.spread(function (contract, acceptedByShipment, deliveryByShipment, pickUpByShipment, tempByShipment) {
                 let minTemp = contract.data.minTemperature;

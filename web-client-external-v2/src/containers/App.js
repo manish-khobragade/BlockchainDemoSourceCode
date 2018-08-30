@@ -45,12 +45,11 @@ class App extends Component {
   }
 
   ShowNotification(event) {
-    // var namespace = "org.acme.shipping.perishable.";
     var eventData = JSON.parse(event);
     const notification = {
       type: "",
       message: "",
-      read: this.props.user.path==="/notifications",
+      read: this.props.user.path === "/notifications",
       eventId: ''
     }
     let eventType = eventData['$class'].split('.').pop();
@@ -59,21 +58,17 @@ class App extends Component {
     switch (eventType) {
       case "TemperatureThresholdEvent":
         console.log(eventData)
-        // toastr.error(`Shipment : ${eventData.shipment.split('#')[1]}`, `Temperature threshold violated. Temperature was ${eventData.temperature}`);
         message = `Shipment : ${eventData.shipment.split('#')[1]} Temperature threshold violated. Temperature was ${eventData.temperature}`
         break;
       case "ShipmentAcceptedError":
-        // toastr.error(`Shipment : ${eventData.shipment.split('#')[1]}`, `The shipment is already accepted`);
         message = `Shipment : ${eventData.shipment.split('#')[1]} The shipment is already accepted`;
 
         break;
       case "ShipmentHasArrived":
-        // toastr.success(`Shipment : ${eventData.shipment.split('#')[1]}`, `Shipment has arrived. Shipment Amount : ${eventData.shipmentAmount}. Penalty : ${eventData.penalty}`);
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment has arrived. Shipment Amount : ${eventData.shipmentAmount}. Penalty : ${eventData.penalty}`;
 
         break;
       case "ShipmentInPortEvent":
-        // toastr.success(`Shipment : ${eventData.shipment.split('#')[1]}`, `Shipment Location updated`);
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment Location updated`;
         break;
       default:
@@ -92,13 +87,13 @@ class App extends Component {
   }
 
   render() {
-    let userLoggedIn =  sessionStorage.userLoggedIn || false;
+    let userLoggedIn =true// sessionStorage.userLoggedIn || false;
     let cardUploaded = this.props.user.user;
     let path = this.props.user.path;
     console.log('path', this.props.path)
     return (
       <div>
-        <div className="row" style={{marginLeft:10 + 'px', marginRight: 10 +'px'}}>
+        <div className="row" style={{ marginLeft: 10 + 'px', marginRight: 10 + 'px' }}>
           {/* Bg Image */}
           {(!userLoggedIn || !cardUploaded) &&
             <LoginModal {...this.props} history={history} />
@@ -112,8 +107,8 @@ class App extends Component {
                 history={history}
                 currentUser={this.props.user.user}
                 notifications={this.props.user.notifications}
-                 path={path}
-                 markAllNotificationsAsRead = {this.props.markAllNotificationsAsRead} />
+                path={path}
+                markAllNotificationsAsRead={this.props.markAllNotificationsAsRead} />
             }
             {(!cardUploaded && userLoggedIn) &&
               <LoginModal {...this.props} showCard={true} history={history} />
@@ -137,12 +132,12 @@ class App extends Component {
               {path === "/dashboard" &&
                 <Dashboard />
               }
-              {path === "/create-shipment" &&
+              {(path === "/create-shipment" || path === "/accept-shipment") &&
                 <ShipmentsContainer {...this.props} />
               }
-              {path === "/accept-shipment" &&
+              {/* {path === "/accept-shipment" &&
                 <CarrierShipment {...this.props} />
-              }
+              } */}
               {path === "/customer-transaction" &&
                 <CustomerTransaction {...this.props} />
               }

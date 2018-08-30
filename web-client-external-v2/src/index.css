@@ -21,6 +21,7 @@ body {
 .activeNav {
   border-right: 4px solid !important;
   border-right-color: rgb(65, 255, 35) !important;
+  background-color: #f5f5f6 !important;
 }
 .coyote-green{
   background-color: rgb(65, 255, 35) !important;
@@ -88,4 +89,18 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+nav .fa {
+ font-size: 24px;
+}
+.log-container {
+  overflow-x: auto;
+}
+.log-row{
+  flex-wrap: unset;
+}
+.log-card {
+  min-width: 230px;
+  margin-right: 16px;
 }

@@ -14,6 +14,7 @@ class LoginModal extends Component {
         }
         this.el = document.createElement('div');
         this.closeModal = this.closeModal.bind(this);
+        this.login = this.login.bind(this);
     }
     closeModal() {
         document.getElementsByClassName('modal')[0].style.display = 'none';
@@ -27,7 +28,9 @@ class LoginModal extends Component {
     componentWillUnmount() {
         modalRoot.removeChild(this.el);
     }
-
+    login(){
+        window.location = 'https://composer-rest-server-coyote-acl-network.mybluemix.net/auth/github';
+    }
     handleChange(event) {
         event.target.id === "cardName" ?
             this.setState({ cardName: event.target.value })
@@ -61,8 +64,8 @@ class LoginModal extends Component {
                                 <h6> Upon clicking on login you will be redirected to github for authorization</h6>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-lg btn-success">
-                                    <a href='http://localhost:3500/auth/github' style={{ color: 'white' }}>Login</a>
+                                <button type="button" className="btn btn-lg btn-success" onClick={this.login}>Login
+                                    {/* <a href='https://composer-rest-server-coyote-acl-network.mybluemix.net/auth/github' style={{ color: 'white' }}>Login</a> */}
                                 </button>
                             </div>
                         </div>

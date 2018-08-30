@@ -1,8 +1,5 @@
 {
-    "API_BASE_URL123" : "https://composer-rest-server-coyote-acl-network.mybluemix.net/api/",
-    "API_BASE_URL" : "http://localhost:3500/api/",
-    "NEW_API_URL":"http://localhost:3500/api/",
-    "ADMIN_API_URL":"http://localhost:2500/api/",
+    "API_BASE_URL" : "https://composer-rest-server-coyote-acl-network.mybluemix.net/api/",
     "GET_CREATE_SHIPMENTS" : "Shipment",
     "ACCEPT_SHIPMENT" : "ShipmentAccepted",
     "GET_CARD_PING" : "system/ping",
