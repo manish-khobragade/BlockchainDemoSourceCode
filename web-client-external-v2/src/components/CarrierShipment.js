@@ -9,10 +9,7 @@ class CarrierShipment extends React.Component {
     }
     acceptShipment(event) {
         event.preventDefault();
-        const shipmentDetails = {
-            shipment: this.shipmentId.current.value
-        }
-        this.props.acceptShipment(shipmentDetails);
+        this.props.acceptShipment(this.shipmentId.current.value);
     }
     render() {
         return (

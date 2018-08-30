@@ -87,7 +87,7 @@ class App extends Component {
   }
 
   render() {
-    let userLoggedIn =true// sessionStorage.userLoggedIn || false;
+    let userLoggedIn = sessionStorage.userLoggedIn || false;
     let cardUploaded = this.props.user.user;
     let path = this.props.user.path;
     console.log('path', this.props.path)

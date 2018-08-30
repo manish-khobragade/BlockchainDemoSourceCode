@@ -48,7 +48,13 @@ export const createShipment = shipment => {
     }
 }
 
-export const acceptShipment = shipment => {
+export const acceptShipment = shipmentId => {
+    const shipment = {
+        "$class": "org.coyote.playground.blockchain.demo.ShipmentAccepted",
+        "shipment": shipmentId,
+        "timestamp": new Date().toISOString()
+    }
+
     return (dispatch) => {
         axios.request({
             method: 'post',
@@ -77,13 +83,6 @@ export const getCardDetailsPing = () => {
         );
     }
 }
-
-// const cardUploaded=()=>{
-//     return {
-//         type: "CARD_UPLOADED",        
-//         payload: true
-//     }
-// }
 
 export const importCard = (cardDetails) => {
     return dispatch => {
@@ -180,13 +179,6 @@ export const submitGPS = (formData) => {
     }
 }
 
-// export const setUserLogInDetails = () => {
-//     return {
-//         type: "USER_LOGGEDIN",
-//         payload: true
-//     }
-// }
-
 const setTemperatureQueryResult = (result) => {
     return {
         type: "TEMPERATURE_QUERY_FETCHED",
@@ -275,7 +267,7 @@ export const getShipmentLogs = (shipmentId, contractId) => {
                 let temperatureTransactions = tempByShipment.data.map(value => {
                     if (value.centigrade < minTemp) { voilationType = 'Low Temperature' }
                     else if (value.centigrade > maxTemp) { voilationType = 'High Temperature' }
-                    
+
                     return {
                         key: key++,
                         invokingParticipant: 'Admin',
@@ -286,42 +278,36 @@ export const getShipmentLogs = (shipmentId, contractId) => {
                 })
 
                 if (acceptedByShipment.data.length > 0) {
-                    acceptedByShipment.data.forEach(querydata => {
-                        shipmentLog.push(
-                            {
-                                key: key++,
-                                invokingParticipant: 'Admin',
-                                state: 'Accepted',
-                                timeStamp: querydata.timestamp,
-                                type: 'transaction'
-                            });
-                    });
+                    shipmentLog.push(
+                        {
+                            key: key++,
+                            invokingParticipant: 'Admin',
+                            state: 'Accepted',
+                            timeStamp: acceptedByShipment.data[0].timestamp,
+                            type: 'transaction'
+                        });
                 }
 
                 if (pickUpByShipment.data.length > 0) {
-                    pickUpByShipment.data.forEach(querydata => {
-                        shipmentLog.push(
-                            {
-                                key: key++,
-                                invokingParticipant: 'Admin',
-                                state: 'Picked Up',
-                                timeStamp: querydata.timestamp,
-                                type: 'transaction'
-                            });
-                    });
+                    shipmentLog.push(
+                        {
+                            key: key++,
+                            invokingParticipant: 'Admin',
+                            state: 'Picked Up',
+                            timeStamp: pickUpByShipment.data[0].timestamp,
+                            type: 'transaction'
+                        });
                 }
 
                 if (deliveryByShipment.data.length > 0) {
-                    deliveryByShipment.data.forEach(querydata => {
-                        shipmentLog.push(
-                            {
-                                key: key++,
-                                invokingParticipant: 'Admin',
-                                state: 'Delivered',
-                                timeStamp: querydata.timestamp,
-                                type: 'transaction'
-                            });
-                    });
+                    shipmentLog.push(
+                        {
+                            key: key++,
+                            invokingParticipant: 'Admin',
+                            state: 'Delivered',
+                            timeStamp: deliveryByShipment.data[0].timestamp,
+                            type: 'transaction'
+                        });
                 }
 
                 if (temperatureTransactions.length > 0) {
