@@ -77,7 +77,7 @@ class UserEmulate extends React.Component {
                                     </a>
                                 </div>
                             }
-                            <a onClick={() => this.logOut()} href='/' className={navListItemClasses} style={{ marginTop: 100 + 'px' }}><i className="fa fa-sign-out mr-3"></i>Logout</a>
+                            <a onClick={() => this.logOut()} href="javascript:var w=window.open('https://github.com/logout', '_blank', 'width=600,height=600');" className={navListItemClasses} style={{ marginTop: 100 + 'px' }}><i className="fa fa-sign-out mr-3"></i>Logout</a>
                             <a href='#' onClick={() => this.handleNavLinkClick("/settings")} className={navListItemClasses + `${this.getNavLinkActiveClass("/settings")}`}><i className="fa fa-cog mr-3"></i>Settings</a>
                         </nav>
                     </div>

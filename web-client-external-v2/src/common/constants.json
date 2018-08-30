@@ -8,7 +8,7 @@
     "PICKUP_SHIPMENT" : "ShipmentPickedUp",
     "SUBMIT_TEMPERATURE" : "TemperatureReading",
     "SUBMIT_GPS" : "GpsReading",
-    "WEB_SOCKET_ENDPOINT": "wss://localhost:3500/",
+    "WEB_SOCKET_ENDPOINT": "wss://composer-rest-server-coyote-acl-network.mybluemix.net/",
     "GET_TEMPERATURE": "queries/filterTemperatureTransaction?temperature=",
     "GET_SHIPMENTS_BY_STATUS": "queries/filterShipmentAsset?status=",
     "QUERY_ACCEPTED_BY_SHIPMENT": "queries/acceptedByShipment?shipment=",

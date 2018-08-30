@@ -25,7 +25,7 @@ class ShipmentDetails extends React.Component {
                                 <div className="col">
                                     <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Contract</label>
                                     <div className="col-sm-16">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.contract} />
+                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.contract.split('#')[1]} />
                                     </div>
                                 </div>
                             </div>
