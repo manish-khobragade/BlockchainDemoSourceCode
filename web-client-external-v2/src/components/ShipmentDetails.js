@@ -16,46 +16,88 @@ class ShipmentDetails extends React.Component {
                     <div className="card-body">
                         <form>
                             <div className="form-group row">
+
                                 <div className="col">
-                                    <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Commodity</label>
-                                    <div className="col-sm-4">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.type} />
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Commodity</label>
+                                        </div>
+                                        <div className="col d-inline-block">
+                                            <label type="text" readOnly className="form-control-plaintext" id="staticEmail"> {this.props.shipment.type}</label>
+                                        </div>
                                     </div>
+
                                 </div>
+
                                 <div className="col">
-                                    <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Contract</label>
-                                    <div className="col-sm-16">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.contract.split('#')[1]} />
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Contract</label>
+                                        </div>
+                                        <div className="col  d-inline-block">
+                                            <label type="text" readOnly className="form-control-plaintext" id="staticEmail">{this.props.shipment.contract.split('#')[1]}</label>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
+
                             <div className="form-group row">
                                 <div className="col">
-                                    <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Status</label>
-                                    <div className="col-sm-4">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.status} />
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Status</label>
+                                        </div>
+                                        <div className="col d-inline-block">
+                                            <label type="text" readOnly className="form-control-plaintext" id="staticEmail">{this.props.shipment.status}</label>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div className="col">
-                                    <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Temperature Readings</label>
-                                    <div className="col-sm-16">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.temperatureReadings.map((temperature) => temperature.centigrade + ", ")} />
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Temperature Readings</label>
+                                        </div>
+                                        <div className="col d-inline-block">
+                                            <label type="text" readOnly className="form-control-plaintext" id="staticEmail">{this.props.shipment.temperatureReadings.map((temperature) => temperature.centigrade + ", ")}</label>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
+
                             <div className="form-group row">
                                 <div className="col">
-                                    <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Unit Count</label>
-                                    <div className="col-sm-4">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.unitCount} />
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Unit Count</label>
+                                        </div>
+                                        <div className="col d-inline-block">
+                                            <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.unitCount} />
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div className="col">
-                                    <label htmlFor="staticEmail" className="col-form-label font-weight-bold">GPS Readings</label>
-                                    <div className="col-sm-16">
-                                        <input type="text" readOnly className="form-control-plaintext" id="staticEmail" value={this.props.shipment.gpsReadings.map((gps) => "[" + gps.latitude + gps.latitudeDir + " " + gps.longitude + gps.longitudeDir + "], ")} />
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <label htmlFor="staticEmail" className="col-form-label font-weight-bold">GPS Readings</label>
+                                        </div>
+
+                                        <div className="col d-inline-block">
+                                            <label className="form-control-plaintext" id="staticEmail">{this.props.shipment.gpsReadings.map((gps) => "[" + gps.latitude + gps.latitudeDir + " " + gps.longitude + gps.longitudeDir + "], ")}</label>
+                                        </div>
                                     </div>
+
                                 </div>
+
                             </div>
 
                         </form>
@@ -85,7 +127,7 @@ class ShipmentDetails extends React.Component {
 
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

@@ -60,17 +60,19 @@ class App extends Component {
         console.log(eventData)
         message = `Shipment : ${eventData.shipment.split('#')[1]} Temperature threshold violated. Temperature was ${eventData.temperature}`
         break;
+
       case "ShipmentAcceptedError":
         message = `Shipment : ${eventData.shipment.split('#')[1]} The shipment is already accepted`;
-
         break;
+
       case "ShipmentHasArrived":
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment has arrived. Shipment Amount : ${eventData.shipmentAmount}. Penalty : ${eventData.penalty}`;
-
         break;
+
       case "ShipmentInPortEvent":
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment Location updated`;
         break;
+
       default:
         break
     }
@@ -90,7 +92,7 @@ class App extends Component {
     let userLoggedIn = sessionStorage.userLoggedIn || false;
     let cardUploaded = this.props.user.user;
     let path = this.props.user.path;
-    console.log('path', this.props.path)
+
     return (
       <div>
         <div className="row" style={{ marginLeft: 10 + 'px', marginRight: 10 + 'px' }}>
