@@ -123,7 +123,7 @@ class ShipmentDetails extends React.Component {
                                             </div>)
                                     })
                                     :
-                                    <h4>No Logs Found</h4>
+                                    <h2>No Logs Found</h2>
                                 }
                             </div>
                         </div>

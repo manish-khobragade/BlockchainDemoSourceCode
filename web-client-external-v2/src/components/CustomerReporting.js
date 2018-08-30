@@ -68,7 +68,7 @@ class ReportingComponent extends React.Component {
                             </tbody>
                         </table>
                         :
-                        <h4>No Results Found !</h4>
+                        <h2>No Results Found !</h2>
                     }
                     </div>
                 </div>
