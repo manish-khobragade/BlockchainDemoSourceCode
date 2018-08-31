@@ -1,5 +1,5 @@
 {
-    "API_BASE_URL" : "https://composer-rest-server-coyote-acl-network.mybluemix.net/api/",
+    "API_BASE_URL" : " http://localhost:3500/api/",
     "GET_CREATE_SHIPMENTS" : "Shipment",
     "ACCEPT_SHIPMENT" : "ShipmentAccepted",
     "GET_CARD_PING" : "system/ping",
@@ -8,7 +8,7 @@
     "PICKUP_SHIPMENT" : "ShipmentPickedUp",
     "SUBMIT_TEMPERATURE" : "TemperatureReading",
     "SUBMIT_GPS" : "GpsReading",
-    "WEB_SOCKET_ENDPOINT": "wss://composer-rest-server-coyote-acl-network.mybluemix.net/",
+    "WEB_SOCKET_ENDPOINT": "wss://localhost:3500/",
     "GET_TEMPERATURE": "queries/filterTemperatureTransaction?temperature=",
     "GET_SHIPMENTS_BY_STATUS": "queries/filterShipmentAsset?status=",
     "QUERY_ACCEPTED_BY_SHIPMENT": "queries/acceptedByShipment?shipment=",

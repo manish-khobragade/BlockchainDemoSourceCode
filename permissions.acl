@@ -44,13 +44,15 @@ rule Carrier_Contract {
   action: ALLOW
 }
 
-rule Customer_Contract {
-  description: "Customer has read access on Contract"
-  participant: "org.coyote.playground.blockchain.demo.Customer"
-  operation: READ
-  resource: "org.coyote.playground.blockchain.demo.Contract"
+rule Carrier_Shipment {
+  description: "Carrier has full access on associated Shipment"
+  participant(c): "org.coyote.playground.blockchain.demo.Carrier"
+  operation: ALL
+  resource(s): "org.coyote.playground.blockchain.demo.Shipment"
+  condition: (s.contract.carrier.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
+
 
 rule Customer_Shipment {
   description: "Customer has full access on associated Shipment"
@@ -61,14 +63,14 @@ rule Customer_Shipment {
   action: ALLOW
 }
 
-rule Carrier_Shipment {
-  description: "Carrier has full access on associated Shipment"
-  participant(c): "org.coyote.playground.blockchain.demo.Carrier"
-  operation: ALL
-  resource(s): "org.coyote.playground.blockchain.demo.Shipment"
-  condition: (s.contract.carrier.getIdentifier() == c.getIdentifier())
+rule Customer_Contract {
+  description: "Customer has read access on Contract"
+  participant: "org.coyote.playground.blockchain.demo.Customer"
+  operation: READ
+  resource: "org.coyote.playground.blockchain.demo.Contract"
   action: ALLOW
 }
+
 
 rule Carrier_Profile {
   description: "Carrier can read and update their own record only"

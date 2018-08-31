@@ -29,7 +29,7 @@ class LoginModal extends Component {
         modalRoot.removeChild(this.el);
     }
     login(){
-        window.location = 'https://composer-rest-server-coyote-acl-network.mybluemix.net/auth/github';
+        window.location = 'http://localhost:3500/auth/github';
     }
     handleChange(event) {
         event.target.id === "cardName" ?
