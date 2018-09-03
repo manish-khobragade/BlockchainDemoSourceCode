@@ -44,6 +44,22 @@ rule Carrier_Contract {
   action: ALLOW
 }
 
+rule Carrier_Facility {
+  description: "Carrier has full access on Facility"
+  participant: "org.coyote.playground.blockchain.demo.Carrier"
+  operation: READ
+  resource: "org.coyote.playground.blockchain.demo.Facility"
+  action: ALLOW
+}
+
+rule Customer_Facility {
+  description: "Customer has full access on Facility"
+  participant: "org.coyote.playground.blockchain.demo.Customer"
+  operation: READ
+  resource: "org.coyote.playground.blockchain.demo.Facility"
+  action: ALLOW
+}
+
 rule Carrier_Shipment {
   description: "Carrier has full access on associated Shipment"
   participant(c): "org.coyote.playground.blockchain.demo.Carrier"
@@ -114,10 +130,26 @@ rule Customer_Shipment_Received {
   action: ALLOW
 }
 
+rule Carrier_Shipment_Received {
+  description: "Customer has full access on ShipmentReceived transaction"
+  participant: "org.coyote.playground.blockchain.demo.Carrier"
+  operation: READ
+  resource: "org.coyote.playground.blockchain.demo.ShipmentReceived"
+  action: ALLOW
+}
+
 rule Customer_Shipment_PickedUp {
   description: "Customer has full access on ShipmentPickedUp transaction"
   participant: "org.coyote.playground.blockchain.demo.Customer"
   operation: ALL
+  resource: "org.coyote.playground.blockchain.demo.ShipmentPickedUp"
+  action: ALLOW
+}
+
+rule Carrier_Shipment_PickedUp {
+  description: "Customer has full access on ShipmentPickedUp transaction"
+  participant: "org.coyote.playground.blockchain.demo.Carrier"
+  operation: READ
   resource: "org.coyote.playground.blockchain.demo.ShipmentPickedUp"
   action: ALLOW
 }
@@ -130,6 +162,14 @@ rule Carrier_Shipment_Accepted {
   action: ALLOW
 }
 
+rule Customer_Shipment_Accepted {
+  description: "Carrier has full access on ShipmentAccepted transaction"
+  participant: "org.coyote.playground.blockchain.demo.Customer"
+  operation: READ
+  resource: "org.coyote.playground.blockchain.demo.ShipmentAccepted"
+  action: ALLOW
+}
+
 rule Carrier_Temperature_All {
   description: "Carrier has full access on TemperatureReading transaction"
   participant: "org.coyote.playground.blockchain.demo.Carrier"
@@ -138,10 +178,26 @@ rule Carrier_Temperature_All {
   action: ALLOW
 }
 
+rule Customer_Temperature_All {
+  description: "Carrier has full access on TemperatureReading transaction"
+  participant: "org.coyote.playground.blockchain.demo.Customer"
+  operation: READ
+  resource: "org.coyote.playground.blockchain.demo.TemperatureReading"
+  action: ALLOW
+}
+
 rule Carrier_GPS_All {
   description: "Carrier has full access on GpsReading transaction"
   participant: "org.coyote.playground.blockchain.demo.Carrier"
   operation: ALL
+  resource: "org.coyote.playground.blockchain.demo.GpsReading"
+  action: ALLOW
+}
+
+rule Customer_GPS_All {
+  description: "Carrier has full access on GpsReading transaction"
+  participant: "org.coyote.playground.blockchain.demo.Customer"
+  operation: READ
   resource: "org.coyote.playground.blockchain.demo.GpsReading"
   action: ALLOW
 }

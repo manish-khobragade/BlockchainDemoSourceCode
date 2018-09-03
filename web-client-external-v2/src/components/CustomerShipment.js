@@ -37,7 +37,9 @@ class CustomerShipment extends React.Component {
                     "appointmentTime": this.state.deliveryFacilityApptTime,
                     "actualTime": ""
                 }
-            ]
+            ],
+            totalAmount: 0,
+            totalPenalty: 0
         }
         this.props.createShipment(formData);
     }

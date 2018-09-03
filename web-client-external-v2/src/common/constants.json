@@ -1,5 +1,5 @@
 {
-    "API_BASE_URL" : " http://localhost:3500/api/",
+    "API_BASE_URL" : " http://localhost:4000/api/",
     "GET_CREATE_SHIPMENTS" : "Shipment",
     "ACCEPT_SHIPMENT" : "ShipmentAccepted",
     "GET_CARD_PING" : "system/ping",
@@ -8,7 +8,8 @@
     "PICKUP_SHIPMENT" : "ShipmentPickedUp",
     "SUBMIT_TEMPERATURE" : "TemperatureReading",
     "SUBMIT_GPS" : "GpsReading",
-    "WEB_SOCKET_ENDPOINT": "wss://localhost:3500/",
+    "WEB_SOCKET_ENDPOINT": "ws://localhost:5000/",
+    "GET_SHIPMENT_BY_ID": "Shipment/",
     "GET_TEMPERATURE": "queries/filterTemperatureTransaction?temperature=",
     "GET_SHIPMENTS_BY_STATUS": "queries/filterShipmentAsset?status=",
     "QUERY_ACCEPTED_BY_SHIPMENT": "queries/acceptedByShipment?shipment=",

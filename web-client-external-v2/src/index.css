@@ -104,3 +104,7 @@ nav .fa {
   min-width: 230px;
   margin-right: 16px;
 }
+
+a {
+  cursor: pointer;
+}

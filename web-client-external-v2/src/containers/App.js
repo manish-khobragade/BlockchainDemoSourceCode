@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// import { Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import Dashboard from '../components/Dashboard';
@@ -10,14 +9,12 @@ import CarrierReporting from '../components/CarrierReporting';
 import CustomerTransaction from '../components/CustomerTransaction';
 import TemperatureTransaction from '../components/TemperatureTransaction';
 import GPSTransaction from '../components/GPSTransaction';
-// import CustomerShipment from '../components/CustomerShipment';
-import CarrierShipment from '../components/CarrierShipment';
 import UserEmulate from "../components/UserEmulate";
 import LoginModal from "../components/LoginModal";
 import { userActions } from "../actions";
 // import landingPageImage from '../components/carrier-landing-hero.jpg'
 // import headerLogo from '../components/Emtec_Logo.png'
-// import ReduxToastr from 'react-redux-toastr'
+import ReduxToastr from 'react-redux-toastr'
 // import { toastr } from 'react-redux-toastr'
 import constants from '../common';
 import Notifications from '../components/Notifications';
@@ -59,14 +56,17 @@ class App extends Component {
       case "TemperatureThresholdEvent":
         console.log(eventData)
         message = `Shipment : ${eventData.shipment.split('#')[1]} Temperature threshold violated. Temperature was ${eventData.temperature}`
+        eventType = 'Temperature Violation';
         break;
 
       case "ShipmentAcceptedError":
         message = `Shipment : ${eventData.shipment.split('#')[1]} The shipment is already accepted`;
+        eventType = 'Shipment Accepted';
         break;
 
       case "ShipmentHasArrived":
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment has arrived. Shipment Amount : ${eventData.shipmentAmount}. Penalty : ${eventData.penalty}`;
+        eventType = 'Shipment Arrived';
         break;
 
       case "ShipmentInPortEvent":
@@ -96,6 +96,16 @@ class App extends Component {
 
     return (
       <div>
+        <ReduxToastr
+          timeOut={4000}
+          newestOnTop={false}
+          preventDuplicates
+          position="top-right"
+          transitionIn="fadeIn"
+          transitionOut="fadeOut"
+          progressBar
+          closeOnToastrClick
+        />
         <div className="row" style={{ marginLeft: 10 + 'px', marginRight: 10 + 'px' }}>
           {/* Bg Image */}
           {(!userLoggedIn || !cardUploaded) &&

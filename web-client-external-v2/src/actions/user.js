@@ -248,36 +248,78 @@ export const markAllNotificationsAsRead = () => {
     }
 }
 
+//https://stackoverflow.com/questions/492994/compare-two-dates-with-javascript
+export const convert = (d) => {
+    // Converts the date in d to a date-object. The input can be:
+    //   a date object: returned without modification
+    //  an array      : Interpreted as [year,month,day]. NOTE: month is 0-11.
+    //   a number     : Interpreted as number of milliseconds
+    //                  since 1 Jan 1970 (a timestamp) 
+    //   a string     : Any format supported by the javascript engine, like
+    //                  "YYYY/MM/DD", "MM/DD/YYYY", "Jan 31 2009" etc.
+    //  an object     : Interpreted as an object with year, month and date
+    //                  attributes.  **NOTE** month is 0-11.
+    return (
+        d.constructor === Date ? d :
+            d.constructor === Array ? new Date(d[0], d[1], d[2]) :
+                d.constructor === Number ? new Date(d) :
+                    d.constructor === String ? new Date(d) :
+                        typeof d === "object" ? new Date(d.year, d.month, d.date) :
+                            NaN
+    );
+}
+
+export const dateCompare = (a, b) => {
+    // Compare two dates (could be of any type supported by the convert
+    // function above) and returns:
+    //  -1 : if a < b
+    //   0 : if a = b
+    //   1 : if a > b
+    // NaN : if a or b is an illegal date
+    // NOTE: The code inside isFinite does an assignment (=).
+    return (
+        isFinite(a = this.convert(a).valueOf()) &&
+            isFinite(b = this.convert(b).valueOf()) ?
+            (a > b) - (a < b) :
+            NaN
+    );
+}
+
 export const getShipmentLogs = (shipmentId, contractId) => {
-    shipmentId = encodeURIComponent(shipmentId);
+    let prefix = "resource:org.coyote.playground.blockchain.demo.Shipment#";
+    let shipment = prefix + shipmentId;
+    shipment = encodeURIComponent(shipment);
     let shipmentLog = [];
     let key = 0;
     return (dispatch) => {
 
         axios.all([
             axios.get(`${constants.API_BASE_URL}${constants.GET_CONTRACT}${contractId}`),
-            axios.get(`${constants.API_BASE_URL}${constants.QUERY_ACCEPTED_BY_SHIPMENT}${shipmentId}`),
-            axios.get(`${constants.API_BASE_URL}${constants.QUERY_DELIVERY_BY_SHIPEMENT}${shipmentId}`),
-            axios.get(`${constants.API_BASE_URL}${constants.QUERY_PICKUP_BY_SHIPMENT}${shipmentId}`),
-            axios.get(`${constants.API_BASE_URL}${constants.QUERY_TEMP_BY_SHIPMENT}${shipmentId}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_ACCEPTED_BY_SHIPMENT}${shipment}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_DELIVERY_BY_SHIPEMENT}${shipment}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_PICKUP_BY_SHIPMENT}${shipment}`),
+            axios.get(`${constants.API_BASE_URL}${constants.QUERY_TEMP_BY_SHIPMENT}${shipment}`),
+            axios.get(`${constants.API_BASE_URL}${constants.GET_SHIPMENT_BY_ID}${shipmentId}`),
         ])
-            .then(axios.spread(function (contract, acceptedByShipment, deliveryByShipment, pickUpByShipment, tempByShipment) {
+            .then(axios.spread(function (contract, acceptedByShipment, deliveryByShipment, pickUpByShipment, tempByShipment, shipmentData) {
                 let minTemp = contract.data.minTemperature;
-                let maxTemp = contract.data.maxTemperature;
-                let voilationType = '';
+                let maxTemp = contract.data.maxTemperature;                
 
-                let temperatureTransactions = tempByShipment.data.map(value => {
-                    if (value.centigrade < minTemp) { voilationType = 'Low Temperature' }
-                    else if (value.centigrade > maxTemp) { voilationType = 'High Temperature' }
+                if (tempByShipment.data.length > 0) {
+                    tempByShipment.data.forEach(querydata => {
+                        if (querydata.centigrade < minTemp || querydata.centigrade > maxTemp) {
+                            shipmentLog.push(
+                                {
+                                    key: key++,
+                                    invokingParticipant: 'Admin',
+                                    state: querydata.centigrade < minTemp ? 'Low Temperature' : 'High Temperature',
+                                    timeStamp: querydata.timestamp,
+                                    type: 'event'
+                                });
+                        }
+                    });
+                }
 
-                    return {
-                        key: key++,
-                        invokingParticipant: 'Admin',
-                        state: voilationType,
-                        timeStamp: value.timestamp,
-                        type: 'event'
-                    }
-                })
 
                 if (acceptedByShipment.data.length > 0) {
                     shipmentLog.push(
@@ -291,39 +333,45 @@ export const getShipmentLogs = (shipmentId, contractId) => {
                 }
 
                 if (pickUpByShipment.data.length > 0) {
+                    let violationPrefix = '';
+                    if (shipmentData.data.loadStops.length > 0) {
+                        let appointmentTime = shipmentData.data.loadStops[0].appointmentTime;
+                        let actualPickupTime = pickUpByShipment.data[pickUpByShipment.data.length - 1].actualPickupTime;
+                        if (dateCompare(appointmentTime, actualPickupTime) === -1) {
+                            violationPrefix = 'Late ';
+                        }
+                    }
+
                     shipmentLog.push(
                         {
                             key: key++,
                             invokingParticipant: 'Admin',
-                            state: 'Picked Up',
-                            timeStamp: pickUpByShipment.data[0].timestamp,
-                            type: 'transaction'
+                            state: violationPrefix + 'Picked Up',
+                            timeStamp: pickUpByShipment.data[pickUpByShipment.data.length - 1].timestamp,
+                            type: violationPrefix === '' ? 'transaction' : 'event'
                         });
                 }
 
                 if (deliveryByShipment.data.length > 0) {
+                    let violationPrefix = '';
+                    if (shipmentData.data.loadStops.length > 0) {
+                        let appointmentTime = shipmentData.data.loadStops[0].appointmentTime;
+                        let actualDeliveredTime = deliveryByShipment.data[pickUpByShipment.data.length - 1].actualDeliveredTime;
+                        if (dateCompare(actualDeliveredTime, appointmentTime) === 1) {
+                            violationPrefix = 'Late ';
+                        }
+                    }
+
                     shipmentLog.push(
                         {
                             key: key++,
                             invokingParticipant: 'Admin',
-                            state: 'Delivered',
-                            timeStamp: deliveryByShipment.data[0].timestamp,
-                            type: 'transaction'
+                            state: violationPrefix + 'Delivered',
+                            timeStamp: deliveryByShipment.data[deliveryByShipment.data.length - 1].timestamp,
+                            type: violationPrefix === '' ? 'transaction' : 'event'
                         });
                 }
 
-                if (temperatureTransactions.length > 0) {
-                    temperatureTransactions.forEach(querydata => {
-                        shipmentLog.push(
-                            {
-                                key: key++,
-                                invokingParticipant: 'Admin',
-                                state: querydata.state,
-                                timeStamp: querydata.timeStamp,
-                                type: querydata.state
-                            });
-                    });
-                }
 
                 shipmentLog.sort((log1, log2) => {
                     var d1 = Date.parse(log1.timeStamp);
@@ -336,7 +384,6 @@ export const getShipmentLogs = (shipmentId, contractId) => {
                     }
                     return 0;
                 });
-                console.log(shipmentLog);
                 dispatch(shipmentLogReceived(shipmentLog));
             }));
 
