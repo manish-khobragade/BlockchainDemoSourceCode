@@ -130,8 +130,8 @@ rule Customer_Shipment_Received {
   action: ALLOW
 }
 
-rule Carrier_Shipment_Received {
-  description: "Customer has full access on ShipmentReceived transaction"
+rule Carrier_Shipment_Received_ReadOnly {
+  description: "Carrier has read only access on ShipmentReceived transaction"
   participant: "org.coyote.playground.blockchain.demo.Carrier"
   operation: READ
   resource: "org.coyote.playground.blockchain.demo.ShipmentReceived"
@@ -146,8 +146,8 @@ rule Customer_Shipment_PickedUp {
   action: ALLOW
 }
 
-rule Carrier_Shipment_PickedUp {
-  description: "Customer has full access on ShipmentPickedUp transaction"
+rule Carrier_Shipment_PickedUp_ReadOnly {
+  description: "Carrier has full access on ShipmentPickedUp transaction"
   participant: "org.coyote.playground.blockchain.demo.Carrier"
   operation: READ
   resource: "org.coyote.playground.blockchain.demo.ShipmentPickedUp"
@@ -162,8 +162,8 @@ rule Carrier_Shipment_Accepted {
   action: ALLOW
 }
 
-rule Customer_Shipment_Accepted {
-  description: "Carrier has full access on ShipmentAccepted transaction"
+rule Customer_Shipment_Accepted_ReadOnly {
+  description: "Customer has read only access on ShipmentAccepted transaction"
   participant: "org.coyote.playground.blockchain.demo.Customer"
   operation: READ
   resource: "org.coyote.playground.blockchain.demo.ShipmentAccepted"
@@ -178,8 +178,8 @@ rule Carrier_Temperature_All {
   action: ALLOW
 }
 
-rule Customer_Temperature_All {
-  description: "Carrier has full access on TemperatureReading transaction"
+rule Customer_Temperature_ReadOnly {
+  description: "Customer has full access on TemperatureReading transaction"
   participant: "org.coyote.playground.blockchain.demo.Customer"
   operation: READ
   resource: "org.coyote.playground.blockchain.demo.TemperatureReading"
@@ -194,8 +194,8 @@ rule Carrier_GPS_All {
   action: ALLOW
 }
 
-rule Customer_GPS_All {
-  description: "Carrier has full access on GpsReading transaction"
+rule Customer_GPS_ReadOnly {
+  description: "Carrier has read only access on GpsReading transaction"
   participant: "org.coyote.playground.blockchain.demo.Customer"
   operation: READ
   resource: "org.coyote.playground.blockchain.demo.GpsReading"
