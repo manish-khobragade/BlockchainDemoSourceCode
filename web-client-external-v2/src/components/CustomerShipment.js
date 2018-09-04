@@ -28,13 +28,13 @@ class CustomerShipment extends React.Component {
                 {
                     "facility": this.state.pickupFacility,
                     "stopType": "PICKUP",
-                    "appointmentTime": this.state.pickupFacilityApptTime,
+                    "appointmentTime": this.state.pickupFacilityApptTime.replace("T", " ") + ":00",
                     "actualTime": ""
                 },
                 {
                     "facility": this.state.deliveryFacility,
                     "stopType": "DELIVERY",
-                    "appointmentTime": this.state.deliveryFacilityApptTime,
+                    "appointmentTime": this.state.deliveryFacilityApptTime.replace("T", " ") + ":00",
                     "actualTime": ""
                 }
             ],

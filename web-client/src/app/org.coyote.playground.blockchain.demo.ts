@@ -56,13 +56,14 @@ export class Contract extends Asset {
     broker: Broker;
     origin: Facility;
     destination: Facility;
-    arrivalDateTime: Date;
     unitPrice: number;
     brokerMargin: number;
     minTemperature: number;
     maxTemperature: number;
-    minPenaltyFactor: number;
-    maxPenaltyFactor: number;
+    minTempViolationPenalty: number;
+    maxTempViolationPenalty: number;
+    pickupLateFee:number;
+    deliveryLateFee:number;
 }
 export class Address {
     city: string;

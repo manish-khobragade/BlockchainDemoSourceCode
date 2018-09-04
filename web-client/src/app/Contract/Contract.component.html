@@ -37,10 +37,7 @@
                    <label for="broker">Broker</label>
                    <textarea formControlName="broker" class="form-control" rows="3"></textarea>
                 </div>              
-                <div class="form-group text-left">
-                   <label for="arrivalDateTime">Arrival DateTime</label>
-                   <input formControlName="arrivalDateTime" type="datetime-local" class="form-control">
-                </div>
+               
                 <div class="form-group text-left">
                    <label for="unitPrice">Unit Price</label>
                    <input formControlName="unitPrice" type="number" step='any' class="form-control">
@@ -58,13 +55,21 @@
                    <input formControlName="maxTemperature" type="number" step='any' class="form-control">
                 </div>
                 <div class="form-group text-left">
-                   <label for="minPenaltyFactor">Min Penalty Factor</label>
-                   <input formControlName="minPenaltyFactor" type="number" step='any' class="form-control">
+                   <label for="minTempViolationPenalty">Min Temp Penalty</label>
+                   <input formControlName="minTempViolationPenalty" type="number" step='any' class="form-control">
                 </div>
                 <div class="form-group text-left">
-                   <label for="maxPenaltyFactor">Max Penalty Factor</label>
-                   <input formControlName="maxPenaltyFactor" type="number" step='any' class="form-control">
+                   <label for="maxTempViolationPenalty">Max Temp Penalty</label>
+                   <input formControlName="maxTempViolationPenalty" type="number" step='any' class="form-control">
                 </div>
+                <div class="form-group text-left">
+                  <label for="pickupLateFee">Pickup Late Fee</label>
+                  <input formControlName="pickupLateFee" type="number" step='any' class="form-control">
+               </div>
+               <div class="form-group text-left">
+                  <label for="deliveryLateFee">Delivery Late Fee</label>
+                  <input formControlName="deliveryLateFee" type="number" step='any' class="form-control">
+               </div>
              </div>
              <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -99,10 +104,7 @@
                    <label for="broker">Broker</label>
                    <textarea [ngModel]="broker" formControlName="broker" class="form-control" rows="3"></textarea>
                 </div>                
-                <div class="form-group text-left">
-                   <label for="arrivalDateTime">Arrival DateTime</label>
-                   <input [ngModel]="arrivalDateTime"formControlName="arrivalDateTime" type="datetime-local" class="form-control">
-                </div>
+                
                 <div class="form-group text-left">
                    <label for="unitPrice">Unit Price</label>
                    <input [ngModel]="unitPrice" formControlName="unitPrice" type="number" step='any' class="form-control">
@@ -120,13 +122,22 @@
                    <input [ngModel]="maxTemperature" formControlName="maxTemperature" type="number" step='any' class="form-control">
                 </div>
                 <div class="form-group text-left">
-                   <label for="minPenaltyFactor">Min Penalty Factor</label>
-                   <input [ngModel]="minPenaltyFactor" formControlName="minPenaltyFactor" type="number" step='any' class="form-control">
+                   <label for="minTempViolationPenalty">Min Temp Penalty</label>
+                   <input [ngModel]="minTempViolationPenalty" formControlName="minTempViolationPenalty" type="number" step='any' class="form-control">
                 </div>
                 <div class="form-group text-left">
-                   <label for="maxPenaltyFactor">Max Penalty Factor</label>
-                   <input [ngModel]="maxPenaltyFactor" formControlName="maxPenaltyFactor" type="number" step='any' class="form-control">
+                   <label for="maxTempViolationPenalty">Max Temp Penalty</label>
+                   <input [ngModel]="maxTempViolationPenalty" formControlName="maxTempViolationPenalty" type="number" step='any' class="form-control">
                 </div>
+
+                <div class="form-group text-left">
+                  <label for="pickupLateFee">Pickup Late Fee</label>
+                  <input [ngModel]="pickupLateFee" formControlName="pickupLateFee" type="number" step='any' class="form-control">
+               </div>
+               <div class="form-group text-left">
+                  <label for="deliveryLateFee">Delivery Late Fee</label>
+                  <input [ngModel]="deliveryLateFee" formControlName="deliveryLateFee" type="number" step='any' class="form-control">
+               </div>
              </div>
              <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -183,14 +194,15 @@
                    <th class="info">Contract ID</th>
                    <th class="info">Customer</th>
                    <th class="info">Carrier</th>
-                   <th class="info">Broker</th>                  
-                   <th class="info">Arrival DateTime</th>
+                   <th class="info">Broker</th> 
                    <th class="info">Unit Price</th>
                    <th class="info">Broker Margin</th>
-                   <th class="info">Min Temperature</th>
-                   <th class="info">Max Temperature</th>
-                   <th class="info">Min Penalty Factor</th>
-                   <th class="info">Max Penalty Factor</th>
+                   <th class="info">Min Temp</th>
+                   <th class="info">Max Temp</th>
+                   <th class="info">Min Temp Penalty</th>
+                   <th class="info">Max Temp Penalty</th>
+                   <th class="info">Pickup Late Fee</th>
+                   <th class="info">Delivery Late Fee</th>
                    <th class="info-actions">Actions</th>
                 </tr>
              </thead>
@@ -199,14 +211,15 @@
                    <td class="asset-properties">{{asset.contractId}}</td>
                    <td class="asset-properties">{{asset.customer.split('#')[1]}}</td>
                    <td class="asset-properties">{{asset.carrier.split('#')[1]}}</td>
-                   <td class="asset-properties">{{asset.broker.split('#')[1]}}</td>                  
-                   <td class="asset-properties">{{asset.arrivalDateTime | date: 'yyyy-MM-dd HH:mm:s'}}</td>
+                   <td class="asset-properties">{{asset.broker.split('#')[1]}}</td>                                     
                    <td class="asset-properties">{{asset.unitPrice}}</td>
                    <td class="asset-properties">{{asset.brokerMargin}}</td>
                    <td class="asset-properties">{{asset.minTemperature}}</td>
                    <td class="asset-properties">{{asset.maxTemperature}}</td>
-                   <td class="asset-properties">{{asset.minPenaltyFactor}}</td>
-                   <td class="asset-properties">{{asset.maxPenaltyFactor}}</td>
+                   <td class="asset-properties">{{asset.minTempViolationPenalty}}</td>
+                   <td class="asset-properties">{{asset.maxTempViolationPenalty}}</td>
+                   <td class="asset-properties">{{asset.pickupLateFee}}</td>
+                   <td class="asset-properties">{{asset.deliveryLateFee}}</td>
                    <td class="display-inline">
                       <button (click)="getForm(asset.contractId);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateAssetModal">
                          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

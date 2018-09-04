@@ -74,6 +74,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         message += "</ul>"
         this.toastr.success(message, "Shipment Location Updated", { enableHTML: true });
         break;
+      case namespace + "ShipmentLatePickup":
+        message = "<ul><li>For Shipment : " + eventData.shipment.split('#')[1] + "</li>";
+        message += "<li>Message : " + eventData.message + "</li>";
+        message += "</ul>"
+        this.toastr.success(message, "Past Appointment Time", { enableHTML: true });
+        break;
     }
 
   }
