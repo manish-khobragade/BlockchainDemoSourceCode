@@ -234,3 +234,11 @@ event ShipmentHasArrived {
   o Double penalty  
   --> Shipment shipment
 }
+
+/**
+ * An event - when the shipment arrives at the destination
+ */
+event ShipmentLatePickup {
+  o String message
+  --> Shipment shipment
+}

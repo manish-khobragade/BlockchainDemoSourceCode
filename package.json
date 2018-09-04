@@ -3,7 +3,7 @@
     "composer": "^0.19.10"
   },
   "name": "coyote-playground-blockchain-demo",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A sample blockchain network demo to test out the features",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/coyote-playground-blockchain-demo.bna",
