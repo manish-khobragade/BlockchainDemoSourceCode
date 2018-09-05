@@ -156,7 +156,7 @@ class ShipmentDetails extends React.Component {
                             </div>
                             <div className="col">
                                 <div className="row">
-                                    <div className="col">
+                                    <div className="col" style={{maxWidth:50 + "%"}}>
                                         <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Actual Time</label>
                                     </div>
                                     <div className="d-inline-block">
@@ -192,7 +192,7 @@ class ShipmentDetails extends React.Component {
                             </div>
                             <div className="col">
                                 <div className="row">
-                                    <div className="col">
+                                    <div className="col" style={{maxWidth:50 + "%"}}>
                                         <label htmlFor="staticEmail" className="col-form-label font-weight-bold">Actual Time</label>
                                     </div>
                                     <div className="d-inline-block">

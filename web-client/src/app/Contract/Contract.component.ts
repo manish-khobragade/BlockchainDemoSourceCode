@@ -36,27 +36,29 @@ export class ContractComponent implements OnInit {
   customer = new FormControl('', Validators.required);
   carrier = new FormControl('', Validators.required);
   broker = new FormControl('', Validators.required);
-  arrivalDateTime = new FormControl('', Validators.required);
   unitPrice = new FormControl('', Validators.required);
   brokerMargin = new FormControl('', Validators.required);
   minTemperature = new FormControl('', Validators.required);
   maxTemperature = new FormControl('', Validators.required);
-  minPenaltyFactor = new FormControl('', Validators.required);
-  maxPenaltyFactor = new FormControl('', Validators.required);
+  minTempViolationPenalty = new FormControl('', Validators.required);
+  maxTempViolationPenalty = new FormControl('', Validators.required);
+  pickupLateFee = new FormControl('', Validators.required);
+  deliveryLateFee = new FormControl('', Validators.required);
 
   constructor(private serviceContract: ContractService, fb: FormBuilder) {
     this.myForm = fb.group({
       contractId: this.contractId,
       customer: this.customer,
       carrier: this.carrier,
-      broker: this.broker,
-      arrivalDateTime: this.arrivalDateTime,
+      broker: this.broker,      
       unitPrice: this.unitPrice,
       brokerMargin: this.brokerMargin,
       minTemperature: this.minTemperature,
       maxTemperature: this.maxTemperature,
-      minPenaltyFactor: this.minPenaltyFactor,
-      maxPenaltyFactor: this.maxPenaltyFactor
+      minTempViolationPenalty: this.minTempViolationPenalty,
+      maxTempViolationPenalty: this.maxTempViolationPenalty,
+      pickupLateFee: this.pickupLateFee,
+      deliveryLateFee: this.deliveryLateFee,
     });
   };
 
@@ -118,27 +120,29 @@ export class ContractComponent implements OnInit {
       'customer': this.customer.value,
       'carrier': this.carrier.value,
       'broker': this.broker.value,
-      'arrivalDateTime': this.arrivalDateTime.value,
       'unitPrice': this.unitPrice.value,
       'brokerMargin': this.brokerMargin.value,
       'minTemperature': this.minTemperature.value,
       'maxTemperature': this.maxTemperature.value,
-      'minPenaltyFactor': this.minPenaltyFactor.value,
-      'maxPenaltyFactor': this.maxPenaltyFactor.value
+      'minTempViolationPenalty': this.minTempViolationPenalty.value,
+      'maxTempViolationPenalty': this.maxTempViolationPenalty.value,
+      'pickupLateFee': this.pickupLateFee.value,
+      'deliveryLateFee': this.deliveryLateFee.value,
     };
 
     this.myForm.setValue({
       'contractId': null,
       'customer': null,
       'carrier': null,
-      'broker': null,
-      'arrivalDateTime': null,
+      'broker': null,      
       'unitPrice': null,
       'brokerMargin': null,
       'minTemperature': null,
       'maxTemperature': null,
-      'minPenaltyFactor': null,
-      'maxPenaltyFactor': null
+      'minTempViolationPenalty': null,
+      'maxTempViolationPenalty': null,
+      'pickupLateFee': null,
+      'deliveryLateFee': null
     });
 
     return this.serviceContract.addAsset(this.asset)
@@ -149,14 +153,15 @@ export class ContractComponent implements OnInit {
           'contractId': null,
           'customer': null,
           'carrier': null,
-          'broker': null,
-          'arrivalDateTime': null,
+          'broker': null,         
           'unitPrice': null,
           'brokerMargin': null,
           'minTemperature': null,
           'maxTemperature': null,
-          'minPenaltyFactor': null,
-          'maxPenaltyFactor': null
+          'minTempViolationPenalty': null,
+          'maxTempViolationPenalty': null,
+          'pickupLateFee': null,
+          'deliveryLateFee': null
         });
         this.loadAll();
       })
@@ -176,13 +181,14 @@ export class ContractComponent implements OnInit {
       'customer': this.customer.value,
       'carrier': this.carrier.value,
       'broker': this.broker.value,
-      'arrivalDateTime': this.arrivalDateTime.value,
       'unitPrice': this.unitPrice.value,
       'brokerMargin': this.brokerMargin.value,
       'minTemperature': this.minTemperature.value,
       'maxTemperature': this.maxTemperature.value,
-      'minPenaltyFactor': this.minPenaltyFactor.value,
-      'maxPenaltyFactor': this.maxPenaltyFactor.value
+      'minTempViolationPenalty': this.minTempViolationPenalty.value,
+      'maxTempViolationPenalty': this.maxTempViolationPenalty.value,
+      'pickupLateFee': this.pickupLateFee.value,
+      'deliveryLateFee': this.deliveryLateFee.value,
     };
 
     return this.serviceContract.updateAsset(form.get('contractId').value, this.asset)
@@ -237,13 +243,14 @@ export class ContractComponent implements OnInit {
           'customer': null,
           'carrier': null,
           'broker': null,
-          'arrivalDateTime': null,
           'unitPrice': null,
           'brokerMargin': null,
           'minTemperature': null,
           'maxTemperature': null,
-          'minPenaltyFactor': null,
-          'maxPenaltyFactor': null
+          'minTempViolationPenalty': null,
+          'maxTempViolationPenalty': null,
+          'pickupLateFee': null,
+          'deliveryLateFee': null
         };
 
         if (result.contractId) {
@@ -270,11 +277,7 @@ export class ContractComponent implements OnInit {
           formObject.broker = null;
         }
 
-        if (result.arrivalDateTime) {
-          formObject.arrivalDateTime = result.arrivalDateTime;
-        } else {
-          formObject.arrivalDateTime = null;
-        }
+      
 
         if (result.unitPrice) {
           formObject.unitPrice = result.unitPrice;
@@ -300,17 +303,31 @@ export class ContractComponent implements OnInit {
           formObject.maxTemperature = null;
         }
 
-        if (result.minPenaltyFactor) {
-          formObject.minPenaltyFactor = result.minPenaltyFactor;
+        if (result.minTempViolationPenalty) {
+          formObject.minTempViolationPenalty = result.minTempViolationPenalty;
         } else {
-          formObject.minPenaltyFactor = null;
+          formObject.minTempViolationPenalty = null;
         }
 
-        if (result.maxPenaltyFactor) {
-          formObject.maxPenaltyFactor = result.maxPenaltyFactor;
+        if (result.maxTempViolationPenalty) {
+          formObject.maxTempViolationPenalty = result.maxTempViolationPenalty;
         } else {
-          formObject.maxPenaltyFactor = null;
+          formObject.maxTempViolationPenalty = null;
         }
+
+        if (result.pickupLateFee) {
+          formObject.pickupLateFee = result.pickupLateFee;
+        } else {
+          formObject.pickupLateFee = null;
+        }
+
+        if (result.deliveryLateFee) {
+          formObject.deliveryLateFee = result.deliveryLateFee;
+        } else {
+          formObject.deliveryLateFee = null;
+        }
+
+
 
         this.myForm.setValue(formObject);
 
@@ -331,14 +348,15 @@ export class ContractComponent implements OnInit {
       'contractId': null,
       'customer': null,
       'carrier': null,
-      'broker': null,
-      'arrivalDateTime': null,
+      'broker': null,    
       'unitPrice': null,
       'brokerMargin': null,
       'minTemperature': null,
       'maxTemperature': null,
-      'minPenaltyFactor': null,
-      'maxPenaltyFactor': null
+      'minTempViolationPenalty': null,
+      'maxTempViolationPenalty': null,
+      'pickupLateFee': null,
+      'deliveryLateFee': null
     });
   }
 }

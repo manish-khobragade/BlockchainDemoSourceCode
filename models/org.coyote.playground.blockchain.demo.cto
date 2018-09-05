@@ -141,9 +141,9 @@ asset Shipment identified by shipmentId {
   o TemperatureReading[] temperatureReadings optional
   o GpsReading[] gpsReadings optional
   o LoadStop[] loadStops
-  o Long totalAmount
-  o Long totalPenalty 
-  o Penalty[] penalties
+  o Long totalAmount optional
+  o Long totalPenalty optional
+  o Penalty[] penalties optional
 }
 
 /**

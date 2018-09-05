@@ -52,11 +52,12 @@ class App extends Component {
     let eventType = eventData['$class'].split('.').pop();
     let message;
 
+    console.log(eventData);
+
     switch (eventType) {
-      case "TemperatureThresholdEvent":
-        console.log(eventData)
-        message = `Shipment : ${eventData.shipment.split('#')[1]} Temperature threshold violated. Temperature was ${eventData.temperature}`
-        eventType = 'Temperature Violation';
+      case "TemperatureThresholdEvent":        
+        message = `Shipment : ${eventData.shipment.split('#')[1]} `  + eventData.message;
+        eventType = eventData.temperatureViolationType;
         break;
 
       case "ShipmentAcceptedError":
@@ -65,13 +66,17 @@ class App extends Component {
         break;
 
       case "ShipmentHasArrived":
-        message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment has arrived. Shipment Amount : ${eventData.shipmentAmount}. Penalty : ${eventData.penalty}`;
+        message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment has arrived. Shipment Amount : ${eventData.shipmentAmount}. Penalty : ${eventData.penalty}` + '. Message : ' + eventData.message;
         eventType = 'Shipment Arrived';
         break;
 
       case "ShipmentInPortEvent":
         message = `Shipment : ${eventData.shipment.split('#')[1]} Shipment Location updated`;
         eventType = 'Location Updated';
+        break;
+      case "ShipmentLatePickup":
+        message = `Shipment : ${eventData.shipment.split('#')[1]} ` + eventData.message;
+        eventType = 'Past Appointment Time';
         break;
 
       default:

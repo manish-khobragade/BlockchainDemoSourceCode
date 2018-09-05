@@ -3,14 +3,14 @@ import React from 'react';
 class CarrierShipment extends React.Component {
     constructor(props) {
         super(props)
-        this.shipmentId = React.createRef();
+        // this.shipmentId = React.createRef();
         this.acceptShipment = this.acceptShipment.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
     }
     acceptShipment(event) {
         event.preventDefault();
-        this.props.acceptShipment(this.shipmentId.current.value);
+        this.props.acceptShipment(this.state.shipment);
     }
     handleChange(event) {
         this.setState({

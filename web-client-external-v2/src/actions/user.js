@@ -114,7 +114,7 @@ export const setDefaultCard = (cardDetails) => {
 }
 
 export const pickupShipment = (shipment, actualPickupTime) => {
-    actualPickupTime = actualPickupTime.replace("T", " ");
+    actualPickupTime = actualPickupTime.replace("T", " ") + ":00";
     return (dispatch) => {
         axios.request({
             method: 'post',
@@ -133,7 +133,7 @@ export const pickupShipment = (shipment, actualPickupTime) => {
 }
 
 export const receiveShipment = (shipment, actualDeliveredTime) => {
-    actualDeliveredTime = actualDeliveredTime.replace("T", " ");
+    actualDeliveredTime = actualDeliveredTime.replace("T", " ") + ":00";
     return (dispatch) => {
         axios.request({
             method: 'post',
